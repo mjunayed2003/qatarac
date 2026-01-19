@@ -14,7 +14,7 @@ function App() {
     <>
       <Header />
     
-      <main className="pt-[105px] md:pt-[100px] min-h-screen">
+      <main className="pt-[50px] md:pt-[50px] min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/service" element={<ServicesPage />} />

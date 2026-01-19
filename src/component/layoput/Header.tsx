@@ -1,12 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import {
-  FaEnvelope,
-  FaFacebookF,
-  FaInstagram,
-  FaPhoneAlt,
-  FaWhatsapp,
-} from "react-icons/fa";
 import { IoIosArrowDown, IoIosMenu, IoIosClose } from "react-icons/io";
 
 const services = [
@@ -82,38 +75,7 @@ const Header: React.FC = () => {
       }`}
     >
       {/* Top Bar - Optimized for Mobile */}
-      <div className="bg-[#F16D34] text-white py-2 px-4 md:px-16 lg:px-24 flex flex-col md:flex-row justify-between items-center text-sm">
-        {/* Social Icons */}
-        <div className="flex items-center gap-3 mb-2 md:mb-0">
-          <a href="#" className="bg-white text-[#E13232] p-1.5 rounded-full hover:bg-gray-100 transition">
-            <FaFacebookF size={12} />
-          </a>
-          <a href="#" className="bg-white text-[#E13232] p-1.5 rounded-full hover:bg-gray-100 transition">
-            <FaInstagram size={12} />
-          </a>
-          <a
-            href="https://wa.me/977553466"
-            target="_blank"
-            rel="noreferrer"
-            className="bg-white p-1.5 rounded-full hover:bg-gray-100 transition"
-          >
-            <FaWhatsapp size={12} className="text-[#25D366]" />
-          </a>
-          <a href="mailto:info@redrockaircon.com" className="bg-white p-1.5 rounded-full hover:bg-gray-100 transition">
-            <FaEnvelope size={12} className="text-[#D14836]" />
-          </a>
-        </div>
-
-        {/* Contact Info */}
-        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-1 font-medium text-xs md:text-sm">
-          <a href="tel:+8801939104157" className="flex items-center gap-2 hover:underline">
-            <FaPhoneAlt className="transform -scale-x-100" />
-            <span>+8801939104157</span>
-          </a>
-          <div className="hidden md:block h-4 w-[1px] bg-white/60"></div>
-          <a href="mailto:junayed@gmail.com" className="hover:underline">junayed@gmail.com</a>
-        </div>
-      </div>
+      
 
       {/* Main Navbar */}
       <div className="bg-[#213448] text-white py-4 px-4 md:px-16 lg:px-24 flex justify-between items-center relative">
