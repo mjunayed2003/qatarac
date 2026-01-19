@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
   FaEnvelope,
@@ -7,274 +7,259 @@ import {
   FaPhoneAlt,
   FaWhatsapp,
 } from "react-icons/fa";
-import { IoIosArrowDown } from "react-icons/io";
+import { IoIosArrowDown, IoIosMenu, IoIosClose } from "react-icons/io";
+
+const services = [
+  "All Services",
+  "Ac Installation",
+  "AC Repair",
+  "Ac Maintenance",
+  "AC Cleaning",
+  "AC not Cooling",
+  "Compressor Change",
+  "Gas Filling",
+  "Capacitor Replace",
+  "Ac Circuit Repairing",
+  "Ac Shifting",
+  "Water Leaking",
+];
 
 const Header: React.FC = () => {
+  // Desktop Dropdown State
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  
+  // Mobile Menu State
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const location = useLocation();
+  
+  // Mobile Service Submenu State (Separated for better UX)
+  const [isMobileServiceOpen, setIsMobileServiceOpen] = useState(false);
+  
+  const [showNav, setShowNav] = useState(true);
   const dropdownRef = useRef<HTMLLIElement>(null);
+  const location = useLocation();
 
-  // route change -> close dropdown & mobile menu
+  // Scroll hide/show logic
   useEffect(() => {
-    setIsDropdownOpen(false);
+    let lastScrollY = window.scrollY;
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 50) {
+        setShowNav(false);
+        setIsDropdownOpen(false); // Hide desktop dropdown on scroll
+      } else {
+        setShowNav(true);
+      }
+      lastScrollY = window.scrollY;
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Route change -> close all menus
+  useEffect(() => {
     setIsMobileOpen(false);
+    setIsMobileServiceOpen(false);
+    setIsDropdownOpen(false);
   }, [location]);
 
+  // Click outside -> close desktop dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
   return (
-    <header className="w-full font-sans fixed top-0 left-0 z-50">
-      {/* TOP BAR */}
-      <div className="bg-[#E13232] text-white py-2 px-4 md:px-16 lg:px-24 flex flex-col md:flex-row justify-between items-center text-sm">
+    <header
+      className={`w-full font-sans fixed top-0 left-0 z-50 transition-transform duration-300 shadow-md ${
+        showNav ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
+      {/* Top Bar - Optimized for Mobile */}
+      <div className="bg-[#F16D34] text-white py-2 px-4 md:px-16 lg:px-24 flex flex-col md:flex-row justify-between items-center text-sm">
         {/* Social Icons */}
         <div className="flex items-center gap-3 mb-2 md:mb-0">
-          <a href="#" className="bg-white text-[#E13232] p-1.5 rounded-full">
-            <FaFacebookF size={14} />
+          <a href="#" className="bg-white text-[#E13232] p-1.5 rounded-full hover:bg-gray-100 transition">
+            <FaFacebookF size={12} />
           </a>
-          <a href="#" className="bg-white text-[#E13232] p-1.5 rounded-full">
-            <FaInstagram size={14} />
+          <a href="#" className="bg-white text-[#E13232] p-1.5 rounded-full hover:bg-gray-100 transition">
+            <FaInstagram size={12} />
           </a>
           <a
             href="https://wa.me/977553466"
             target="_blank"
             rel="noreferrer"
-            className="bg-white p-1.5 rounded-full"
+            className="bg-white p-1.5 rounded-full hover:bg-gray-100 transition"
           >
-            <FaWhatsapp size={14} className="text-[#25D366]" />
+            <FaWhatsapp size={12} className="text-[#25D366]" />
           </a>
-          <a
-            href="mailto:info@redrockaircon.com"
-            className="bg-white p-1.5 rounded-full"
-          >
-            <FaEnvelope size={14} className="text-[#D14836]" />
+          <a href="mailto:info@redrockaircon.com" className="bg-white p-1.5 rounded-full hover:bg-gray-100 transition">
+            <FaEnvelope size={12} className="text-[#D14836]" />
           </a>
         </div>
 
-        {/* Contact */}
-        <div className="flex items-center gap-6 font-medium">
-          <div className="flex items-center gap-2">
+        {/* Contact Info */}
+        <div className="flex flex-wrap justify-center items-center gap-x-4 gap-y-1 font-medium text-xs md:text-sm">
+          <a href="tel:+8801939104157" className="flex items-center gap-2 hover:underline">
             <FaPhoneAlt className="transform -scale-x-100" />
-            <span>Call: +8801939104157</span>
-          </div>
-          <div className="h-4 w-[1px] bg-white/60"></div>
-          <div>
-            <span>junayed@gmail.com</span>
-          </div>
+            <span>+8801939104157</span>
+          </a>
+          <div className="hidden md:block h-4 w-[1px] bg-white/60"></div>
+          <a href="mailto:junayed@gmail.com" className="hover:underline">junayed@gmail.com</a>
         </div>
       </div>
 
-      {/* NAVBAR */}
-      <div className="bg-[#050614] text-white py-5 px-4 md:px-16 lg:px-24 flex justify-between items-center">
-        {/* LOGO */}
-        <div className="flex items-end select-none cursor-pointer">
-          <h1 className="text-4xl font-extrabold tracking-tighter flex items-center">
+      {/* Main Navbar */}
+      <div className="bg-[#213448] text-white py-4 px-4 md:px-16 lg:px-24 flex justify-between items-center relative">
+        
+        {/* Logo */}
+        <NavLink to="/" className="flex items-end select-none cursor-pointer group">
+          <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter flex items-center">
             <span className="text-[#E13232]">QATAR</span>
-            <span className="text-white ml-2">AC</span>
+            <span className="text-white ml-2 group-hover:text-gray-200 transition">AC</span>
           </h1>
-
-          <div className="relative w-9 h-9 ml-3 rounded-full border-2 border-[#E13232] flex items-center justify-center">
+          <div className="relative w-8 h-8 md:w-9 md:h-9 ml-2 rounded-full border-2 border-[#E13232] flex items-center justify-center">
             <div className="text-center leading-none">
-              <span className="text-[10px] font-bold text-[#E13232]">24</span>
+              <span className="text-[9px] md:text-[10px] font-bold text-[#E13232]">24</span>
               <br />
-              <span className="text-[10px] font-bold text-white">7</span>
+              <span className="text-[9px] md:text-[10px] font-bold text-white">7</span>
             </div>
           </div>
-        </div>
+        </NavLink>
 
-        {/* MENU */}
-        <nav className="hidden md:flex items-center text-[17px] font-normal tracking-wide">
+        {/* Desktop Menu */}
+        <nav className="hidden md:flex items-center text-[16px] font-normal tracking-wide">
           <ul className="flex items-center gap-6">
             <li>
-              <NavLink
-                to="/"
-                className={({ isActive }) =>
-                  isActive ? "text-[#E13232]" : "hover:text-[#E13232]"
-                }
+              <NavLink to="/" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>
+                Home
+              </NavLink>
+            </li>
+            <li className="text-white/40">|</li>
+
+            {/* Desktop Service Dropdown */}
+            <li ref={dropdownRef} className="relative h-full py-2">
+              <button
+                className={`flex items-center gap-1 hover:text-[#E13232] transition ${isDropdownOpen ? "text-[#E13232]" : ""}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsDropdownOpen(!isDropdownOpen);
+                }}
+              >
+                Service <IoIosArrowDown size={16} className={`transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Desktop Dropdown Content */}
+              <div 
+                className={`absolute top-full left-0 mt-4 w-60 bg-white text-gray-800 shadow-2xl border-t-4 border-[#E13232] rounded-b-md overflow-hidden transition-all duration-300 origin-top ${
+                  isDropdownOpen ? "opacity-100 scale-y-100 visible" : "opacity-0 scale-y-0 invisible"
+                }`}
+              >
+                <ul className="text-[15px] font-sans divide-y divide-gray-100 max-h-[400px] overflow-y-auto">
+                  {services.map((item) => (
+                    <li key={item}>
+                      <NavLink
+                        to={`/service/${item.replaceAll(" ", "-").toLowerCase()}`}
+                        className="block px-5 py-3 hover:bg-red-50 hover:text-[#E13232] transition hover:pl-7 duration-200"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        {item}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+            <li className="text-white/40">|</li>
+            <li><NavLink to="/gallery" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>Gallery</NavLink></li>
+            <li className="text-white/40">|</li>
+            <li><NavLink to="/about" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>About</NavLink></li>
+            <li className="text-white/40">|</li>
+            <li><NavLink to="/blog" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>Blog</NavLink></li>
+            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>Contact</NavLink></li>
+            <li className="text-white/40">|</li>
+            
+          </ul>
+        </nav>
+
+        {/* Mobile Toggle Button */}
+        <button
+          className="md:hidden text-white text-3xl focus:outline-none"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsMobileOpen(!isMobileOpen);
+          }}
+        >
+          {isMobileOpen ? <IoIosClose className="text-[#E13232]" /> : <IoIosMenu />}
+        </button>
+
+        {/* ======================= */}
+        {/*      MOBILE MENU        */}
+        {/* ======================= */}
+        <div
+          className={`md:hidden absolute top-full left-0 w-full bg-[#213448] shadow-2xl border-t border-gray-800 transition-all duration-300 ease-in-out origin-top overflow-y-auto max-h-[85vh] ${
+            isMobileOpen ? "opacity-100 scale-y-100 visible" : "opacity-0 scale-y-0 invisible"
+          }`}
+        >
+          <ul className="flex flex-col p-6 space-y-4 text-[16px] font-medium tracking-wide">
+            
+            <li>
+              <NavLink 
+                to="/" 
+                className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}
               >
                 Home
               </NavLink>
             </li>
+            <hr className="border-white/10" />
 
-            <li className="text-white/40">|</li>
-
-            {/* SERVICE DROPDOWN */}
-            <li ref={dropdownRef} className="relative">
+            {/* Mobile Services */}
+            <li>
               <button
-                className="flex items-center gap-1 hover:text-[#E13232]"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={`w-full text-left flex justify-between items-center pl-2 transition ${isMobileServiceOpen ? "text-[#E13232]" : "text-gray-200 hover:text-[#E13232]"}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileServiceOpen(!isMobileServiceOpen);
+                }}
               >
-                Service <IoIosArrowDown size={16} />
+                Service <IoIosArrowDown size={18} className={`transition-transform duration-300 ${isMobileServiceOpen ? "rotate-180" : ""}`} />
               </button>
 
-              {/* Dropdown list */}
-              {isDropdownOpen && (
-                <div className="absolute top-full left-0 mt-3 w-64 bg-white text-gray-800 shadow-xl border-t-4 border-[#E13232] rounded-sm">
-                  <ul className="text-[15px] font-sans divide-y divide-gray-100">
-                    {[
-                      "All Services",
-                      "Ac Installation",
-                      "AC Repair",
-                      "Ac Maintenance",
-                      "AC Cleaning",
-                      "AC not Cooling",
-                      "Compressor Change",
-                      "Gas Filling",
-                      "Capacitor Replace",
-                      "Ac Circuit Repairing",
-                      "Ac Shifting",
-                      "Water Leaking",
-                    ].map((item) => (
-                      <li key={item}>
-                        <NavLink
-                          to={`/service/${item.replaceAll(" ", "-").toLowerCase()}`}
-                          className="block px-4 py-3 hover:bg-gray-100 hover:text-[#E13232] transition"
-                        >
-                          {item}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+              <div className={`overflow-hidden transition-all duration-300 ${isMobileServiceOpen ? "max-h-[500px] mt-3" : "max-h-0"}`}>
+                <ul className="bg-[#121426] rounded-md py-2 space-y-1 border-l-2 border-[#E13232] ml-2">
+                  {services.map((item) => (
+                    <li key={item}>
+                      <NavLink
+                        to={`/service/${item.replaceAll(" ", "-").toLowerCase()}`}
+                        className="block py-2 pl-4 text-sm text-gray-300 hover:text-white hover:bg-white/5 transition"
+                      >
+                        {item}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </li>
+            <hr className="border-white/10" />
 
-            <li className="text-white/40">|</li>
-
-            <li>
-              <NavLink
-                to="/gallery"
-                className={({ isActive }) =>
-                  isActive ? "text-[#E13232]" : "hover:text-[#E13232]"
-                }
-              >
-                Gallery
-              </NavLink>
-            </li>
-
-            <li className="text-white/40">|</li>
-
-            <li>
-              <NavLink
-                to="/about"
-                className={({ isActive }) =>
-                  isActive ? "text-[#E13232]" : "hover:text-[#E13232]"
-                }
-              >
-                About
-              </NavLink>
-            </li>
-
-            <li className="text-white/40">|</li>
-
-            <li>
-              <NavLink
-                to="/contact"
-                className={({ isActive }) =>
-                  isActive ? "text-[#E13232]" : "hover:text-[#E13232]"
-                }
-              >
-                Contact
-              </NavLink>
-            </li>
-
-            <li className="text-white/40">|</li>
-
-            <li>
-              <NavLink
-                to="/blog"
-                className={({ isActive }) =>
-                  isActive ? "text-[#E13232]" : "hover:text-[#E13232]"
-                }
-              >
-                Blog
-              </NavLink>
-            </li>
+            <li><NavLink to="/gallery" className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}>Gallery</NavLink></li>
+            <li><NavLink to="/about" className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}>About</NavLink></li>
+            <li><NavLink to="/blog" className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}>Blog</NavLink></li>
+            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}>Contact</NavLink></li>
           </ul>
-        </nav>
-
-        {/* MOBILE BUTTON */}
-        <button
-          className="md:hidden text-white text-2xl"
-          onClick={() => setIsMobileOpen(!isMobileOpen)}
-        >
-          <i className="fa-solid fa-bars"></i>
-        </button>
-      </div>
-
-      {/* MOBILE MENU */}
-      <div
-        className={`md:hidden bg-[#0a0818] border-t border-gray-800 overflow-hidden transition-all duration-300 ${
-          isMobileOpen ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <ul className="flex flex-col p-4 space-y-4 text-lg tracking-wide text-center uppercase">
-          <li>
-            <NavLink to="/" className="block hover:text-[#E13232]">
-              Home
-            </NavLink>
-          </li>
-
-          <li>
-            <button
-              className="w-full text-left flex justify-between items-center hover:text-[#E13232]"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              Service <IoIosArrowDown size={18} />
-            </button>
-
-            {/* Mobile dropdown list */}
-            {isDropdownOpen && (
-              <ul className="bg-[#0f0c24] text-left pl-6 mt-2 space-y-2">
-                {[
-                  "All Services",
-                  "Ac Installation",
-                  "AC Repair",
-                  "Ac Maintenance",
-                  "AC Cleaning",
-                  "AC not Cooling",
-                  "Compressor Change",
-                  "Gas Filling",
-                  "Capacitor Replace",
-                  "Ac Circuit Repairing",
-                  "Ac Shifting",
-                  "Water Leaking",
-                ].map((item) => (
-                  <li key={item}>
-                    <NavLink
-                      to={`/service/${item.replaceAll(" ", "-").toLowerCase()}`}
-                      className="block py-2 hover:text-white"
-                    >
-                      {item}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-
-          <li>
-            <NavLink to="/gallery" className="block hover:text-[#E13232]">
-              Gallery
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/about" className="block hover:text-[#E13232]">
-              About
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/contact" className="block hover:text-[#E13232]">
-              Contact
-            </NavLink>
-          </li>
-
-          <li>
-            <NavLink to="/blog" className="block hover:text-[#E13232]">
-              Blog
-            </NavLink>
-          </li>
-        </ul>
+          
+          {/* Mobile Footer Info */}
+          <div className="bg-[#E13232]/10 p-4 text-center mt-4 border-t border-white/10">
+              <p className="text-gray-400 text-sm">Need Help?</p>
+              <a href="tel:+8801939104157" className="text-[#E13232] font-bold block mt-1">+880 1939-104157</a>
+          </div>
+        </div>
       </div>
     </header>
   );
