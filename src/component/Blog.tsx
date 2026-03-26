@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async"; // 1. Helmet Import
 import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Variants } from "framer-motion";
@@ -19,7 +20,7 @@ const blogPosts = [
     category: "Repair",
     author: "Admin",
     date: "Oct 12, 2023",
-    image: "https://images.unsplash.com/photo-1581094794329-cd8119604f89?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image10.jpeg",
   },
   {
     id: 2,
@@ -28,7 +29,7 @@ const blogPosts = [
     category: "Tips",
     author: "Technician",
     date: "Sep 28, 2023",
-    image: "https://images.unsplash.com/photo-1517429117621-e0c6553258c4?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/image2.jpeg",
   },
   {
     id: 3,
@@ -37,7 +38,7 @@ const blogPosts = [
     category: "Maintenance",
     author: "Admin",
     date: "Sep 15, 2023",
-    image: "https://images.unsplash.com/photo-1631545763952-320c24387d7e?q=80&w=2056&auto=format&fit=crop",
+    image: "/images/image3.jpeg",
   },
   {
     id: 4,
@@ -46,7 +47,7 @@ const blogPosts = [
     category: "News",
     author: "Editor",
     date: "Aug 10, 2023",
-    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop",
+    image: "/images/image4.jpeg",
   },
   {
     id: 5,
@@ -55,7 +56,7 @@ const blogPosts = [
     category: "Repair",
     author: "Technician",
     date: "Jul 22, 2023",
-    image: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image5.jpeg",
   },
   {
     id: 6,
@@ -64,7 +65,7 @@ const blogPosts = [
     category: "Maintenance",
     author: "Admin",
     date: "Jun 05, 2023",
-    image: "https://plus.unsplash.com/premium_photo-1663040325429-19e48df3637e?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image6.jpeg",
   },
 ];
 
@@ -105,6 +106,31 @@ const Blog: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen font-sans">
       
+      {/* ================================================= */}
+      {/*              SEO METADATA (HELMET)                */}
+      {/* ================================================= */}
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Blog & Maintenance Tips | Qatar AC Repair & Service</title>
+        <meta name="description" content="Read expert articles on AC repair, maintenance tips, energy saving advice, and HVAC news in Doha. Keep your AC running efficiently." />
+        <meta name="keywords" content="AC maintenance tips, HVAC blog, AC repair guide, energy saving tips Qatar, air conditioner problems, Qatar AC news" />
+        <link rel="canonical" href="https://qatarac.com/blog" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://qatarac.com/blog" />
+        <meta property="og:title" content="Blog & Maintenance Tips | Qatar AC" />
+        <meta property="og:description" content="Expert advice on AC repair, maintenance, and energy saving in Doha." />
+        <meta property="og:image" content="https://qatarac.com/static/images/blog-og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://qatarac.com/blog" />
+        <meta name="twitter:title" content="Blog & Maintenance Tips | Qatar AC" />
+        <meta name="twitter:description" content="Expert advice on AC repair, maintenance, and energy saving in Doha." />
+        <meta name="twitter:image" content="https://qatarac.com/static/images/blog-og-image.jpg" />
+      </Helmet>
+
       {/* ======================= */}
       {/*      HERO HEADER        */}
       {/* ======================= */}
@@ -217,7 +243,7 @@ const Blog: React.FC = () => {
                   {/* Read More Button */}
                   <div className="mt-auto pt-4 border-t border-gray-100">
                     <button 
-                      onClick={() => navigate(`/blog/${post.id}`)} // Assuming you will create dynamic single blog pages later
+                      onClick={() => navigate(`/blog/${post.id}`)} 
                       className="flex items-center gap-2 text-[#050614] font-bold text-sm uppercase tracking-wider group-hover:gap-3 transition-all"
                     >
                       Read More <FaArrowRight className="text-[#E13232]" />

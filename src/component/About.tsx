@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";  
+import { Helmet } from "react-helmet-async"; // 1. Helmet Import করা হয়েছে
+import { motion, type Variants } from "framer-motion";
 import { 
   FaAward, 
   FaUsers, 
@@ -12,20 +12,19 @@ import {
 } from "react-icons/fa";
 
 // ==============================
-// 2. TYPED ANIMATION VARIANTS
+// ANIMATION VARIANTS
 // ==============================
 
-// এখানে ': Variants' টাইপটি যোগ করা হয়েছে
 const fadeInUp: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0, 
-    transition: { duration: 0.6, ease: "easeOut" } 
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } 
   }
 };
 
-const staggerContainer: Variants = {
+const staggerContainer = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -33,16 +32,41 @@ const staggerContainer: Variants = {
   }
 };
 
-const About: React.FC = () => {
+const About = () => {
   return (
     <div className="bg-white min-h-screen font-sans">
+      
+      {/* ================================================= */}
+      {/*              SEO METADATA (HELMET)                */}
+      {/* ================================================= */}
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>About Us | Best AC Maintenance & Repair in Doha - Qatar AC</title>
+        <meta name="description" content="Learn about Qatar AC, Doha's most trusted HVAC service provider. Our certified technicians offer 24/7 AC repair, installation, and maintenance." />
+        <meta name="keywords" content="About Qatar AC, HVAC company Doha, AC technicians Qatar, AC repair company history, best AC service Doha" />
+        <link rel="canonical" href="https://qatarac.com/about" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://qatarac.com/about" />
+        <meta property="og:title" content="About Us | Qatar AC - Expert Cooling Solutions" />
+        <meta property="og:description" content="Dedicated to quality and reliability. We provide top-notch cooling solutions with over 10 years of experience in Qatar." />
+        <meta property="og:image" content="https://qatarac.com/static/images/about-og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://qatarac.com/about" />
+        <meta name="twitter:title" content="About Us | Qatar AC - Expert Cooling Solutions" />
+        <meta name="twitter:description" content="Dedicated to quality and reliability. We provide top-notch cooling solutions with over 10 years of experience in Qatar." />
+        <meta name="twitter:image" content="https://qatarac.com/static/images/about-og-image.jpg" />
+      </Helmet>
 
       {/* ======================= */}
       {/* 1. HERO HEADER          */}
       {/* ======================= */}
       <section className="relative bg-[#050614] text-white py-20 md:py-28 overflow-hidden">
         {/* Background Image with Overlay */}
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=2069&auto=format&fit=crop')] bg-cover bg-center opacity-20"></div>
+        <div className="absolute inset-0 bg-[url('/images/image1.jpeg')] bg-cover bg-center opacity-20"></div>
         
         <div className="relative z-10 container mx-auto px-4 text-center">
           <motion.div
@@ -81,7 +105,7 @@ const About: React.FC = () => {
             >
               <div className="relative rounded-xl overflow-hidden shadow-2xl border-b-4 border-[#E13232]">
                 <img 
-                  src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop" 
+                  src="/images/image2.jpeg" 
                   alt="Technician Working" 
                   className="w-full h-auto object-cover"
                 />
@@ -228,7 +252,13 @@ const About: React.FC = () => {
 
 // Helper Components
 
-const StatItem = ({ icon, number, label }: { icon: React.ReactNode, number: string, label: string }) => (
+type StatItemProps = {
+  icon: React.ReactNode;
+  number: string;
+  label: string;
+};
+
+const StatItem = ({ icon, number, label }: StatItemProps) => (
   <motion.div 
     variants={fadeInUp}
     initial="hidden"
@@ -242,7 +272,13 @@ const StatItem = ({ icon, number, label }: { icon: React.ReactNode, number: stri
   </motion.div>
 );
 
-const FeatureCard = ({ icon, title, desc }: { icon: React.ReactNode, title: string, desc: string }) => (
+type FeatureCardProps = {
+  icon: React.ReactNode;
+  title: string;
+  desc: string;
+};
+
+const FeatureCard = ({ icon, title, desc }: FeatureCardProps) => (
   <motion.div 
     variants={fadeInUp}
     className="bg-white p-8 rounded-xl shadow-lg border-b-4 border-transparent hover:border-[#E13232] transition-all duration-300 group text-center md:text-left"

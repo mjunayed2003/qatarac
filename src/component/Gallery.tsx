@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Helmet } from "react-helmet-async"; // 1. Helmet Import
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 
 // ==============================
@@ -12,80 +13,80 @@ const portfolioData = [
     id: 1,
     category: "Installation",
     title: "Split AC Installation",
-    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop",
+    image: "/images/image3.jpeg",
   },
   {
     id: 2,
     category: "Repair",
     title: "Circuit Board Repair",
-    image: "https://images.unsplash.com/photo-1581094794329-cd8119604f89?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image2.jpeg",
   },
   {
     id: 3,
     category: "Satellite",
     title: "Dish Setup Doha",
-    image: "https://images.unsplash.com/photo-1534224039826-c7a0eda0e666?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image9.jpeg",
   },
   {
     id: 4,
     category: "Maintenance",
     title: "AC Deep Cleaning",
-    image: "https://images.unsplash.com/photo-1631545763952-320c24387d7e?q=80&w=2056&auto=format&fit=crop",
+    image: "/images/image4.jpeg",
   },
   {
     id: 5,
     category: "Installation",
     title: "Commercial AC Setup",
-    image: "https://images.unsplash.com/photo-1517429117621-e0c6553258c4?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/image5.jpeg",
   },
   {
     id: 6,
     category: "Satellite",
     title: "Receiver Wiring",
-    image: "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image6.jpeg",
   },
   {
     id: 7,
     category: "Repair",
     title: "Compressor Fixing",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image7.avif",
   },
   {
     id: 8,
     category: "Installation",
     title: "Window AC Fitting",
-    image: "https://images.unsplash.com/photo-1593106578502-27f320723b2d?q=80&w=1948&auto=format&fit=crop",
+    image: "/images/image8.jpg",
   },
   {
     id: 9,
     category: "Maintenance",
     title: "Gas Refilling",
-    image: "https://images.unsplash.com/photo-1635327265936-e8d132644265?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image10.jpeg",
   },
   {
     id: 10,
     category: "Repair",
     title: "Leakage Repair",
-    image: "https://images.unsplash.com/photo-1521207418485-99c705420785?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image11.jpeg",
   },
   {
     id: 11,
     category: "Satellite",
     title: "Signal Tuning",
-    image: "https://images.unsplash.com/photo-1521302200778-3336845cda35?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/image1.jpeg",
   },
   {
     id: 12,
     category: "Installation",
     title: "Central AC Work",
-    image: "https://images.unsplash.com/photo-1605218456194-96156f707f15?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image5.jpeg",
   },
 ];
 
 // ==============================
 // 2. COMPONENT
 // ==============================
-const GalleryPage: React.FC = () => {
+const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -98,9 +99,34 @@ const GalleryPage: React.FC = () => {
   return (
     <div className="bg-gray-50 min-h-screen font-sans pb-20">
       
+      {/* ================================================= */}
+      {/*              SEO METADATA (HELMET)                */}
+      {/* ================================================= */}
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Our Work Portfolio | AC Installation & Repair Projects in Doha</title>
+        <meta name="description" content="Browse our portfolio of completed AC projects in Doha. See examples of split AC installation, duct cleaning, circuit repair, and satellite dish setups by Qatar AC." />
+        <meta name="keywords" content="AC installation gallery, AC repair photos, HVAC projects Doha, satellite dish setup images, Qatar AC portfolio" />
+        <link rel="canonical" href="https://qatarac.com/gallery" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://qatarac.com/gallery" />
+        <meta property="og:title" content="Our Work Portfolio | Qatar AC Projects" />
+        <meta property="og:description" content="See our latest work in AC installation, repair, and maintenance across Doha." />
+        <meta property="og:image" content="https://qatarac.com/static/images/gallery-og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://qatarac.com/gallery" />
+        <meta name="twitter:title" content="Our Work Portfolio | Qatar AC Projects" />
+        <meta name="twitter:description" content="See our latest work in AC installation, repair, and maintenance across Doha." />
+        <meta name="twitter:image" content="https://qatarac.com/static/images/gallery-og-image.jpg" />
+      </Helmet>
+
       {/* HEADER SECTION */}
       <section className="bg-[#050614] text-white py-16 md:py-24 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        <div className="absolute inset-0 bg-[url('/images/image3.jpeg')] opacity-10"></div>
         <div className="relative z-10 container mx-auto px-4">
           <motion.h2 
             initial={{ opacity: 0, y: -20 }}
@@ -157,7 +183,7 @@ const GalleryPage: React.FC = () => {
               className="group relative overflow-hidden rounded-lg cursor-pointer shadow-sm hover:shadow-xl bg-white"
               onClick={() => setSelectedImage(item.image)}
             >
-              {/* Image Container - Adjusted Height for Mobile */}
+              {/* Image Container */}
               <div className="h-32 xs:h-40 md:h-64 overflow-hidden">
                 <img
                   src={item.image}
@@ -220,4 +246,4 @@ const GalleryPage: React.FC = () => {
   );
 };
 
-export default GalleryPage;
+export default Gallery;

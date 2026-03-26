@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Disallow admin or private pages (যদি ভবিষ্যতে অ্যাডমিন প্যানেল থাকে)
+Disallow: /admin/
+Disallow: /login/
+Disallow: /dashboard/
+Disallow: /api/
+
+# Sitemap Location
+Sitemap: https://qatarac.com/sitemap.xml

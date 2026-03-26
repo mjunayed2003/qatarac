@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
 
 const FloatingButton: React.FC = () => {
-  const phoneNumber = "+8801939104157"; // আপনার নম্বর
-  const whatsappNumber = "8801939104157"; // WhatsApp নম্বর (Country code সহ, '+' ছাড়া)
+  const phoneNumber = "+97460031993"; // আপনার নম্বর
+  const whatsappNumber = "97460031993"; // WhatsApp নম্বর (Country code সহ, '+' ছাড়া)
 
   return (
     <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-50 flex flex-col gap-4 items-end">

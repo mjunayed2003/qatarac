@@ -1,6 +1,6 @@
 import React from "react";
-import { motion } from "framer-motion";
-import type { Variants } from "framer-motion";
+import { Helmet } from "react-helmet-async";
+import { cubicBezier, motion } from "framer-motion";
 
 // Icons Import
 import { 
@@ -21,7 +21,7 @@ import Contact from "./Contact";
 /* ======================================================
    FRAMER MOTION VARIANTS
 ====================================================== */
-const containerVariants: Variants = {
+const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -32,20 +32,19 @@ const containerVariants: Variants = {
   },
 };
 
-const itemVariants: Variants = {
+const itemVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
+      ease: cubicBezier(0.16, 1, 0.3, 1),
     },
   },
 };
 
-// Right Side Stats Animation
-const statsContainerVariants: Variants = {
+const statsContainerVariants = {
   hidden: { opacity: 0, x: 50 },
   visible: {
     opacity: 1,
@@ -58,7 +57,7 @@ const statsContainerVariants: Variants = {
   },
 };
 
-const statItemVariants: Variants = {
+const statItemVariants = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: { opacity: 1, scale: 1 },
 };
@@ -66,10 +65,35 @@ const statItemVariants: Variants = {
 /* ======================================================
    HOME COMPONENT
 ====================================================== */
-const Home: React.FC = () => {
+const Home = () => {
   return (
     <div className="bg-white min-h-screen font-sans overflow-x-hidden">
       
+      {/* ================================================= */}
+      {/*              SEO METADATA (HELMET)                */}
+      {/* ================================================= */}
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Best AC Installation & Repair in Doha | Qatar AC</title>
+        <meta name="description" content="Qatar AC provides expert air conditioning installation, repair, and maintenance services in Doha. 24/7 emergency support with certified technicians." />
+        <meta name="keywords" content="AC repair Doha, AC installation Qatar, HVAC maintenance, split AC service, central AC repair Doha, air conditioner cleaning" />
+        <link rel="canonical" href="https://qatarac.com/" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://qatarac.com/" />
+        <meta property="og:title" content="Best AC Installation & Repair in Doha | Qatar AC" />
+        <meta property="og:description" content="Expert AC services in Doha. Installation, maintenance, and repair by certified professionals." />
+        <meta property="og:image" content="https://qatarac.com/static/images/og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://qatarac.com/" />
+        <meta name="twitter:title" content="Best AC Installation & Repair in Doha | Qatar AC" />
+        <meta name="twitter:description" content="Expert AC services in Doha. Installation, maintenance, and repair by certified professionals." />
+        <meta name="twitter:image" content="https://qatarac.com/static/images/og-image.jpg" />
+      </Helmet>
+
       {/* ================================================= */}
       {/* HERO SECTION */}
       {/* ================================================= */}
@@ -80,7 +104,7 @@ const Home: React.FC = () => {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=2069&auto=format&fit=crop')",
+              "url('/images/image3.jpeg')",
           }}
         >
           {/* Gradient Overlay */}
@@ -92,16 +116,13 @@ const Home: React.FC = () => {
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 w-full items-center">
             
-            {/* ========================== */}
-            {/* LEFT SIDE: TEXT CONTENT    */}
-            {/* ========================== */}
+            {/* LEFT SIDE: TEXT CONTENT */}
             <motion.div
               variants={containerVariants}
               initial="hidden"
               animate="visible"
               className="text-white"
             >
-              {/* Tagline */}
               <motion.div
                 variants={itemVariants}
                 className="flex items-center gap-3 mb-4"
@@ -112,7 +133,6 @@ const Home: React.FC = () => {
                 </h3>
               </motion.div>
 
-              {/* Heading */}
               <motion.h1
                 variants={itemVariants}
                 className="text-4xl sm:text-5xl md:text-7xl font-extrabold leading-tight mb-6"
@@ -123,7 +143,6 @@ const Home: React.FC = () => {
                 </span>
               </motion.h1>
 
-              {/* Description */}
               <motion.p
                 variants={itemVariants}
                 className="text-gray-300 text-base md:text-xl mb-8 max-w-lg"
@@ -132,7 +151,6 @@ const Home: React.FC = () => {
                 Available 24/7 with certified professionals at your doorstep.
               </motion.p>
 
-              {/* Features List */}
               <motion.div
                 variants={itemVariants}
                 className="flex flex-wrap gap-6 mb-10 text-sm md:text-base text-gray-300"
@@ -148,7 +166,6 @@ const Home: React.FC = () => {
                 </span>
               </motion.div>
 
-              {/* Buttons */}
               <motion.div
                 variants={itemVariants}
                 className="flex flex-col sm:flex-row gap-4"
@@ -161,7 +178,7 @@ const Home: React.FC = () => {
                 </a>
 
                 <a
-                  href="#contact"
+                  href="/contact"
                   className="border-2 border-white/40 hover:bg-white hover:text-black text-white px-8 py-4 rounded-md font-bold uppercase text-sm tracking-wide transition text-center"
                 >
                   Contact Us
@@ -169,48 +186,24 @@ const Home: React.FC = () => {
               </motion.div>
             </motion.div>
 
-            {/* ========================== */}
-            {/* RIGHT SIDE: STATS GRID     */}
-            {/* ========================== */}
+            {/* RIGHT SIDE: STATS GRID */}
             <motion.div 
               variants={statsContainerVariants}
               initial="hidden"
               animate="visible"
               className="grid grid-cols-2 gap-4 md:gap-6 mt-8 lg:mt-0"
             >
-              {/* Stat Card 1 */}
-              <StatsCard 
-                icon={<FaProjectDiagram />} 
-                number="500+" 
-                label="Projects Done" 
-              />
-              {/* Stat Card 2 */}
-              <StatsCard 
-                icon={<FaUsers />} 
-                number="300+" 
-                label="Happy Clients" 
-              />
-              {/* Stat Card 3 */}
-              <StatsCard 
-                icon={<FaAward />} 
-                number="50+" 
-                label="Awards Won" 
-              />
-              {/* Stat Card 4 */}
-              <StatsCard 
-                icon={<FaHeadset />} 
-                number="24/7" 
-                label="Support" 
-              />
+              <StatsCard icon={<FaProjectDiagram />} number="500+" label="Projects Done" />
+              <StatsCard icon={<FaUsers />} number="300+" label="Happy Clients" />
+              <StatsCard icon={<FaAward />} number="50+" label="Awards Won" />
+              <StatsCard icon={<FaHeadset />} number="24/7" label="Support" />
             </motion.div>
 
           </div>
         </div>
       </section>
 
-      {/* =================================== */}
-      {/*       ALL OTHER COMPONENTS          */}
-      {/* =================================== */}
+      {/* ALL OTHER COMPONENTS */}
       <div>
         <ServicesPage />
         <SatelliteService />
@@ -222,8 +215,14 @@ const Home: React.FC = () => {
   );
 };
 
+// Stats Card Component
+interface StatsCardProps {
+  icon: React.ReactNode;
+  number: string;
+  label: string;
+}
 
-const StatsCard = ({ icon, number, label }: { icon: React.ReactNode, number: string, label: string }) => {
+const StatsCard = ({ icon, number, label }: StatsCardProps) => {
   return (
     <motion.div 
       variants={statItemVariants}

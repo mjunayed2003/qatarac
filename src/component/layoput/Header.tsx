@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { IoIosArrowDown, IoIosMenu, IoIosClose } from "react-icons/io";
+import { FaThList } from "react-icons/fa";
 
 const services = [
-  "All Services",
   "Ac Installation",
   "AC Repair",
   "Ac Maintenance",
@@ -18,26 +18,19 @@ const services = [
 ];
 
 const Header: React.FC = () => {
-  // Desktop Dropdown State
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  
-  // Mobile Menu State
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  
-  // Mobile Service Submenu State (Separated for better UX)
   const [isMobileServiceOpen, setIsMobileServiceOpen] = useState(false);
-  
   const [showNav, setShowNav] = useState(true);
   const dropdownRef = useRef<HTMLLIElement>(null);
   const location = useLocation();
 
-  // Scroll hide/show logic
   useEffect(() => {
     let lastScrollY = window.scrollY;
     const handleScroll = () => {
       if (window.scrollY > lastScrollY && window.scrollY > 50) {
         setShowNav(false);
-        setIsDropdownOpen(false); // Hide desktop dropdown on scroll
+        setIsDropdownOpen(false);
       } else {
         setShowNav(true);
       }
@@ -47,20 +40,15 @@ const Header: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Route change -> close all menus
   useEffect(() => {
     setIsMobileOpen(false);
     setIsMobileServiceOpen(false);
     setIsDropdownOpen(false);
   }, [location]);
 
-  // Click outside -> close desktop dropdown
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setIsDropdownOpen(false);
       }
     };
@@ -74,12 +62,9 @@ const Header: React.FC = () => {
         showNav ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      {/* Top Bar - Optimized for Mobile */}
-      
-
       {/* Main Navbar */}
       <div className="bg-[#213448] text-white py-4 px-4 md:px-16 lg:px-24 flex justify-between items-center relative">
-        
+
         {/* Logo */}
         <NavLink to="/" className="flex items-end select-none cursor-pointer group">
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tighter flex items-center">
@@ -99,7 +84,12 @@ const Header: React.FC = () => {
         <nav className="hidden md:flex items-center text-[16px] font-normal tracking-wide">
           <ul className="flex items-center gap-6">
             <li>
-              <NavLink to="/" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"
+                }
+              >
                 Home
               </NavLink>
             </li>
@@ -114,16 +104,39 @@ const Header: React.FC = () => {
                   setIsDropdownOpen(!isDropdownOpen);
                 }}
               >
-                Service <IoIosArrowDown size={16} className={`transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`} />
+                Service{" "}
+                <IoIosArrowDown
+                  size={16}
+                  className={`transition-transform duration-300 ${isDropdownOpen ? "rotate-180" : ""}`}
+                />
               </button>
 
               {/* Desktop Dropdown Content */}
-              <div 
+              <div
                 className={`absolute top-full left-0 mt-4 w-60 bg-white text-gray-800 shadow-2xl border-t-4 border-[#E13232] rounded-b-md overflow-hidden transition-all duration-300 origin-top ${
                   isDropdownOpen ? "opacity-100 scale-y-100 visible" : "opacity-0 scale-y-0 invisible"
                 }`}
               >
                 <ul className="text-[15px] font-sans divide-y divide-gray-100 max-h-[400px] overflow-y-auto">
+
+                  {/* ── All Services Link (সবার উপরে) ── */}
+                  <li>
+                    <NavLink
+                      to="/service"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 px-5 py-3 font-bold transition duration-200 hover:pl-7 ${
+                          isActive
+                            ? "bg-red-50 text-[#E13232]"
+                            : "bg-red-50/60 text-[#E13232] hover:bg-red-100"
+                        }`
+                      }
+                      onClick={() => setIsDropdownOpen(false)}
+                    >
+                      <FaThList className="text-xs" />
+                      All Services
+                    </NavLink>
+                  </li>
+
                   {services.map((item) => (
                     <li key={item}>
                       <NavLink
@@ -138,15 +151,51 @@ const Header: React.FC = () => {
                 </ul>
               </div>
             </li>
+
             <li className="text-white/40">|</li>
-            <li><NavLink to="/gallery" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>Gallery</NavLink></li>
+            <li>
+              <NavLink
+                to="/gallery"
+                className={({ isActive }) =>
+                  isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"
+                }
+              >
+                Gallery
+              </NavLink>
+            </li>
             <li className="text-white/40">|</li>
-            <li><NavLink to="/about" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>About</NavLink></li>
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"
+                }
+              >
+                About
+              </NavLink>
+            </li>
             <li className="text-white/40">|</li>
-            <li><NavLink to="/blog" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>Blog</NavLink></li>
-            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"}>Contact</NavLink></li>
+            <li>
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"
+                }
+              >
+                Blog
+              </NavLink>
+            </li>
             <li className="text-white/40">|</li>
-            
+            <li>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive ? "text-[#E13232] font-semibold" : "hover:text-[#E13232] transition"
+                }
+              >
+                Contact
+              </NavLink>
+            </li>
           </ul>
         </nav>
 
@@ -170,11 +219,15 @@ const Header: React.FC = () => {
           }`}
         >
           <ul className="flex flex-col p-6 space-y-4 text-[16px] font-medium tracking-wide">
-            
+
             <li>
-              <NavLink 
-                to="/" 
-                className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]"
+                    : "block hover:text-[#E13232] text-gray-200 pl-2 transition"
+                }
               >
                 Home
               </NavLink>
@@ -184,17 +237,48 @@ const Header: React.FC = () => {
             {/* Mobile Services */}
             <li>
               <button
-                className={`w-full text-left flex justify-between items-center pl-2 transition ${isMobileServiceOpen ? "text-[#E13232]" : "text-gray-200 hover:text-[#E13232]"}`}
+                className={`w-full text-left flex justify-between items-center pl-2 transition ${
+                  isMobileServiceOpen ? "text-[#E13232]" : "text-gray-200 hover:text-[#E13232]"
+                }`}
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsMobileServiceOpen(!isMobileServiceOpen);
                 }}
               >
-                Service <IoIosArrowDown size={18} className={`transition-transform duration-300 ${isMobileServiceOpen ? "rotate-180" : ""}`} />
+                Service{" "}
+                <IoIosArrowDown
+                  size={18}
+                  className={`transition-transform duration-300 ${isMobileServiceOpen ? "rotate-180" : ""}`}
+                />
               </button>
 
-              <div className={`overflow-hidden transition-all duration-300 ${isMobileServiceOpen ? "max-h-[500px] mt-3" : "max-h-0"}`}>
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  isMobileServiceOpen ? "max-h-[600px] mt-3" : "max-h-0"
+                }`}
+              >
                 <ul className="bg-[#121426] rounded-md py-2 space-y-1 border-l-2 border-[#E13232] ml-2">
+
+                  {/* ── All Services Link (Mobile সবার উপরে) ── */}
+                  <li>
+                    <NavLink
+                      to="/service"
+                      className={({ isActive }) =>
+                        `flex items-center gap-2 py-2.5 pl-4 text-sm font-bold transition ${
+                          isActive
+                            ? "text-[#E13232]"
+                            : "text-[#E13232]/80 hover:text-[#E13232] hover:bg-white/5"
+                        }`
+                      }
+                    >
+                      <FaThList className="text-xs" />
+                      All Services
+                    </NavLink>
+                  </li>
+
+                  {/* Divider */}
+                  <li className="border-t border-white/10 mx-3" />
+
                   {services.map((item) => (
                     <li key={item}>
                       <NavLink
@@ -210,16 +294,62 @@ const Header: React.FC = () => {
             </li>
             <hr className="border-white/10" />
 
-            <li><NavLink to="/gallery" className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}>Gallery</NavLink></li>
-            <li><NavLink to="/about" className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}>About</NavLink></li>
-            <li><NavLink to="/blog" className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}>Blog</NavLink></li>
-            <li><NavLink to="/contact" className={({ isActive }) => isActive ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]" : "block hover:text-[#E13232] text-gray-200 pl-2 transition"}>Contact</NavLink></li>
+            <li>
+              <NavLink
+                to="/gallery"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]"
+                    : "block hover:text-[#E13232] text-gray-200 pl-2 transition"
+                }
+              >
+                Gallery
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]"
+                    : "block hover:text-[#E13232] text-gray-200 pl-2 transition"
+                }
+              >
+                About
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/blog"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]"
+                    : "block hover:text-[#E13232] text-gray-200 pl-2 transition"
+                }
+              >
+                Blog
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block text-[#E13232] pl-2 border-l-2 border-[#E13232]"
+                    : "block hover:text-[#E13232] text-gray-200 pl-2 transition"
+                }
+              >
+                Contact
+              </NavLink>
+            </li>
           </ul>
-          
+
           {/* Mobile Footer Info */}
           <div className="bg-[#E13232]/10 p-4 text-center mt-4 border-t border-white/10">
-              <p className="text-gray-400 text-sm">Need Help?</p>
-              <a href="tel:+8801939104157" className="text-[#E13232] font-bold block mt-1">+880 1939-104157</a>
+            <p className="text-gray-400 text-sm">Need Help?</p>
+            <a href="tel:+8801939104157" className="text-[#E13232] font-bold block mt-1">
+              +880 1939-104157
+            </a>
           </div>
         </div>
       </div>

@@ -7,10 +7,13 @@ import AdminLayout from "../component/layoput/AdminLayout";
 // User Pages
 import Home from "../component/Home";
 import ServicesPage from "../component/Service";
+import ServiceDetailPage from "../component/ServiceDetailPage"; // ← নতুন import
 import GalleryPage from "../component/Gallery";
 import About from "../component/About";
 import Blog from "../component/Blog";
 import Contact from "../component/Contact";
+
+// Admin Pages
 import AdminDashboard from "../component/admin/AdminDashboard";
 import ManageServices from "../component/admin/ManageServices";
 import ManageGallery from "../component/admin/ManageGallery";
@@ -27,7 +30,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <UserLayout />,
-        errorElement: <div>Oops! Something went wrong.</div>, // Error Page
+        errorElement: <div>Oops! Something went wrong.</div>,
         children: [
             {
                 path: "/",
@@ -36,6 +39,10 @@ export const router = createBrowserRouter([
             {
                 path: "service",
                 element: <ServicesPage />,
+            },
+            {
+                path: "service/:slug",
+                element: <ServiceDetailPage />,
             },
             {
                 path: "gallery",

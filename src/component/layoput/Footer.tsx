@@ -55,9 +55,9 @@ const Footer: React.FC = () => {
 
             {/* Social Icons */}
             <div className="flex gap-4">
-              <SocialLink icon={<FaFacebookF />} href="#" />
+              <SocialLink icon={<FaFacebookF />} href="https://www.facebook.com/qataracrepairservicedoha?mibextid=wwXIfr&rdid=oPLEEhFnomoyVA2e&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1EwBfPx72n%2F%3Fmibextid%3DwwXIfr" />
               <SocialLink icon={<FaInstagram />} href="#" />
-              <SocialLink icon={<FaWhatsapp />} href="https://wa.me/977553466" />
+              <SocialLink icon={<FaWhatsapp />} href="https://wa.me/97460031993" />
             </div>
           </div>
 
@@ -101,20 +101,19 @@ const Footer: React.FC = () => {
               <li className="flex items-start gap-3">
                 <FaMapMarkerAlt className="text-[#E13232] text-xl mt-1 shrink-0" />
                 <span>
-                  Street 24, Industrial Area,<br /> Doha, Qatar.
+                  Al mansoura Doha Qatar
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <FaPhoneAlt className="text-[#E13232] text-lg shrink-0" />
                 <div className="flex flex-col">
-                  <a href="tel:+97477553466" className="hover:text-white transition">+974 7755 3466</a>
-                  <a href="tel:+8801939104157" className="hover:text-white transition">+880 1939 104157</a>
+                  <a href="tel:+97460031993" className="hover:text-white transition">+974 60031993</a>
                 </div>
               </li>
               <li className="flex items-center gap-3">
                 <FaEnvelope className="text-[#E13232] text-lg shrink-0" />
-                <a href="mailto:info@redrockaircon.com" className="hover:text-white transition">
-                  info@redrockaircon.com
+                <a href="mailto:bdimru098@gmail.com" className="hover:text-white transition">
+                  bdimru098@gmail.com
                 </a>
               </li>
             </ul>

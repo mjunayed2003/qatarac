@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async"; // 1. Helmet Import
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import { 
@@ -33,6 +34,31 @@ const Contact: React.FC = () => {
   return (
     <div className="bg-white min-h-screen font-sans">
       
+      {/* ================================================= */}
+      {/*              SEO METADATA (HELMET)                */}
+      {/* ================================================= */}
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Contact Us | 24/7 AC Repair & Service in Doha - Qatar AC</title>
+        <meta name="description" content="Need urgent AC repair in Doha? Contact Qatar AC now at +974 6003 1993. We offer 24/7 emergency support. Visit us at Al Mansoura." />
+        <meta name="keywords" content="contact Qatar AC, AC repair phone number Doha, HVAC emergency contact, Qatar AC location Al Mansoura, AC technician contact" />
+        <link rel="canonical" href="https://qatarac.com/contact" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://qatarac.com/contact" />
+        <meta property="og:title" content="Contact Us | 24/7 AC Repair & Service in Doha" />
+        <meta property="og:description" content="Need urgent AC repair? Call us now at +974 6003 1993. Available 24/7 for all your cooling needs." />
+        <meta property="og:image" content="https://qatarac.com/static/images/contact-og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://qatarac.com/contact" />
+        <meta name="twitter:title" content="Contact Us | 24/7 AC Repair & Service in Doha" />
+        <meta name="twitter:description" content="Need urgent AC repair? Call us now at +974 6003 1993. Available 24/7 for all your cooling needs." />
+        <meta name="twitter:image" content="https://qatarac.com/static/images/contact-og-image.jpg" />
+      </Helmet>
+
       {/* ======================= */}
       {/*      HERO HEADER        */}
       {/* ======================= */}
@@ -85,27 +111,27 @@ const Contact: React.FC = () => {
                 <ContactInfoCard 
                   icon={<FaPhoneAlt />} 
                   title="Phone Number" 
-                  details={["+974 7755 3466", "+880 1939 104157"]} 
+                  details={["+97460031993"]} 
                   isLink={true}
                 />
                 <ContactInfoCard 
                   icon={<FaEnvelope />} 
                   title="Email Address" 
-                  details={["info@redrockaircon.com", "junayed@gmail.com"]} 
+                  details={["bdimru098@gmail.com"]} 
                   isLink={false}
                 />
                 <ContactInfoCard 
                   icon={<FaMapMarkerAlt />} 
                   title="Office Location" 
-                  details={["Street 24, Industrial Area", "Doha, Qatar"]} 
+                  details={["Al mansoura Doha Qatar"]} 
                   isLink={false}
                 />
               </div>
 
               {/* Social Links */}
               <motion.div variants={fadeInUp} className="mt-8 flex gap-4">
-                <SocialButton icon={<FaWhatsapp />} link="https://wa.me/977553466" color="bg-[#25D366]" />
-                <SocialButton icon={<FaPhoneAlt />} link="tel:+97477553466" color="bg-[#E13232]" />
+                <SocialButton icon={<FaWhatsapp />} link="https://wa.me/97460031993" color="bg-[#25D366]" />
+                <SocialButton icon={<FaPhoneAlt />} link="tel:+97460031993" color="bg-[#E13232]" />
               </motion.div>
             </div>
 
@@ -160,7 +186,6 @@ const Contact: React.FC = () => {
       {/* ======================= */}
       {/*      GOOGLE MAP         */}
       {/* ======================= */}
-      {/* Height reduced: h-[300px] (mobile) & h-[350px] (desktop) */}
       <section className="relative w-full h-[300px] md:h-[350px]">
         <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d230887.8920197772!2d51.35567756816005!3d25.28409748611172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c534ffdce87f%3A0x44d9319f78cfd4b1!2sDoha%2C%20Qatar!5e0!3m2!1sen!2sbd!4v1700000000000!5m2!1sen!2sbd" 
@@ -174,11 +199,11 @@ const Contact: React.FC = () => {
           title="Google Map Location - Doha"
         ></iframe>
         
-        {/* Map Overlay Card (Hidden on very small screens, adjusted for smaller map) */}
+        {/* Map Overlay Card */}
         <div className="absolute bottom-4 left-4 bg-white p-4 rounded-lg shadow-xl max-w-[250px] hidden sm:block border-l-4 border-[#E13232]">
             <h4 className="font-bold text-base text-[#050614]">Visit Our Office</h4>
             <p className="text-xs text-gray-600 mt-1">
-                Doha Industrial Area, Qatar.
+                Al mansoura Doha Qatar
             </p>
         </div>
       </section>

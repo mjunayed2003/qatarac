@@ -1,5 +1,5 @@
 import React from "react";
-import StatsCard from "./StatsCard"; // উপরের কার্ডটি ইম্পোর্ট করা হলো
+import StatsCard from "./StatsCard";
 import { FaUsers, FaTools, FaImages, FaEnvelope, FaEllipsisV } from "react-icons/fa";
 
 const AdminDashboard: React.FC = () => {

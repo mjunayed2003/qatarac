@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async"; // 1. Helmet Import
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 import {
@@ -19,15 +20,27 @@ import {
 } from "react-icons/fa";
 
 // ==============================
-// 1. DATA
+// 1. TYPE DEFINITIONS
 // ==============================
-const servicesData = [
+interface ServiceData {
+  id: number;
+  title: string;
+  slug: string;
+  desc: string;
+  image: string;
+  icon: React.ReactNode;
+}
+
+// ==============================
+// 2. DATA
+// ==============================
+const servicesData: ServiceData[] = [
   {
     id: 1,
     title: "AC Installation",
     slug: "ac-installation",
     desc: "Professional split & window AC unit installation.",
-    image: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=2069&auto=format&fit=crop",
+    image: "/images/image3.jpeg",
     icon: <FaTools />,
   },
   {
@@ -35,7 +48,7 @@ const servicesData = [
     title: "AC Repair",
     slug: "ac-repair",
     desc: "Expert diagnosis for cooling & noise issues.",
-    image: "https://images.unsplash.com/photo-1581094794329-cd8119604f89?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image2.jpeg",
     icon: <FaWrench />,
   },
   {
@@ -43,7 +56,7 @@ const servicesData = [
     title: "AC Maintenance",
     slug: "ac-maintenance",
     desc: "Routine servicing to extend machine lifespan.",
-    image: "https://images.unsplash.com/photo-1631545763952-320c24387d7e?q=80&w=2056&auto=format&fit=crop",
+    image: "/images/image4.jpeg",
     icon: <FaSnowflake />,
   },
   {
@@ -51,7 +64,7 @@ const servicesData = [
     title: "AC Cleaning",
     slug: "ac-cleaning",
     desc: "Deep cleaning of filters, coils & drainage.",
-    image: "https://plus.unsplash.com/premium_photo-1663040325429-19e48df3637e?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image9.jpeg",
     icon: <FaFan />,
   },
   {
@@ -59,7 +72,7 @@ const servicesData = [
     title: "AC Not Cooling",
     slug: "ac-not-cooling",
     desc: "Fixing thermostat & airflow blockages.",
-    image: "https://images.unsplash.com/photo-1517429117621-e0c6553258c4?q=80&w=2000&auto=format&fit=crop",
+    image: "/images/image5.jpeg",
     icon: <FaThermometerHalf />,
   },
   {
@@ -67,7 +80,7 @@ const servicesData = [
     title: "Compressor Change",
     slug: "compressor-change",
     desc: "Replacing faulty compressors with genuine parts.",
-    image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image6.jpeg",
     icon: <FaCompress />,
   },
   {
@@ -75,7 +88,7 @@ const servicesData = [
     title: "Gas Filling",
     slug: "gas-filling",
     desc: "Refrigerant top-up and leak detection.",
-    image: "https://images.unsplash.com/photo-1635327265936-e8d132644265?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image7.avif",
     icon: <FaGasPump />,
   },
   {
@@ -83,7 +96,7 @@ const servicesData = [
     title: "Capacitor Replace",
     slug: "capacitor-replace",
     desc: "Quick fix for outdoor unit starting issues.",
-    image: "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image8.jpg",
     icon: <FaBolt />,
   },
   {
@@ -91,7 +104,7 @@ const servicesData = [
     title: "AC Circuit Repair",
     slug: "ac-circuit-repairing",
     desc: "Advanced PCB repair for inverter ACs.",
-    image: "https://images.unsplash.com/photo-1593106578502-27f320723b2d?q=80&w=1948&auto=format&fit=crop",
+    image: "/images/image1.jpeg",
     icon: <FaMicrochip />,
   },
   {
@@ -99,7 +112,7 @@ const servicesData = [
     title: "AC Shifting",
     slug: "ac-shifting",
     desc: "Safe dismantling and re-installation service.",
-    image: "https://images.unsplash.com/photo-1605218456194-96156f707f15?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image10.jpeg",
     icon: <FaTruckMoving />,
   },
   {
@@ -107,7 +120,7 @@ const servicesData = [
     title: "Water Leaking",
     slug: "water-leaking",
     desc: "Fixing indoor unit leakage & blocked pipes.",
-    image: "https://images.unsplash.com/photo-1521207418485-99c705420785?q=80&w=2070&auto=format&fit=crop",
+    image: "/images/image11.jpeg",
     icon: <FaTint />,
   },
   {
@@ -121,10 +134,8 @@ const servicesData = [
 ];
 
 // ==============================
-// 2. ANIMATION VARIANTS (FIXED)
+// 3. ANIMATION VARIANTS
 // ==============================
-
-// Explicitly typing variants resolves the "Type string is not assignable" error
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -143,16 +154,45 @@ const cardVariants: Variants = {
     scale: 1,
     transition: { 
       duration: 0.5, 
-      ease: "easeOut" // Fixed: Ensure this is a valid Easing string
+      ease: "easeOut" 
     } 
   },
 };
 
+// ==============================
+// 4. MAIN COMPONENT
+// ==============================
 const ServicesPage: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-[#F9FAFB] min-h-screen font-sans py-5 relative">
+    <div className="bg-[#F9FAFB] min-h-screen font-sans py-10 relative">
+      
+      {/* ================================================= */}
+      {/*              SEO METADATA (HELMET)                */}
+      {/* ================================================= */}
+      <Helmet>
+        {/* Primary Meta Tags */}
+        <title>Our Services | AC Installation, Repair & Maintenance in Doha</title>
+        <meta name="description" content="Explore our professional AC services in Doha including installation, repair, gas filling, and deep cleaning. 24/7 emergency support available." />
+        <meta name="keywords" content="AC services Doha, AC installation Qatar, AC repair service, HVAC maintenance, AC cleaning, gas filling, compressor change" />
+        <link rel="canonical" href="https://qatarac.com/services" />
+
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://qatarac.com/services" />
+        <meta property="og:title" content="Our Services | Expert AC Solutions in Doha" />
+        <meta property="og:description" content="From installation to emergency repair, we cover all your cooling needs with certified experts." />
+        <meta property="og:image" content="https://qatarac.com/static/images/services-og-image.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:url" content="https://qatarac.com/services" />
+        <meta name="twitter:title" content="Our Services | Expert AC Solutions in Doha" />
+        <meta name="twitter:description" content="From installation to emergency repair, we cover all your cooling needs with certified experts." />
+        <meta name="twitter:image" content="https://qatarac.com/static/images/services-og-image.jpg" />
+      </Helmet>
+
       <div className="container mx-auto px-4 md:px-8 lg:px-12">
         
         {/* HEADER SECTION */}
