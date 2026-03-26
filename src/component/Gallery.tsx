@@ -114,14 +114,14 @@ const Gallery = () => {
         <meta property="og:url" content="https://qatarac.com/gallery" />
         <meta property="og:title" content="Our Work Portfolio | Qatar AC Projects" />
         <meta property="og:description" content="See our latest work in AC installation, repair, and maintenance across Doha." />
-        <meta property="og:image" content="https://qatarac.com/static/images/gallery-og-image.jpg" />
+        <meta property="og:image" content="https://qatarac.com/images/image3.jpeg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://qatarac.com/gallery" />
         <meta name="twitter:title" content="Our Work Portfolio | Qatar AC Projects" />
         <meta name="twitter:description" content="See our latest work in AC installation, repair, and maintenance across Doha." />
-        <meta name="twitter:image" content="https://qatarac.com/static/images/gallery-og-image.jpg" />
+        <meta name="twitter:image" content="https://qatarac.com/images/image3.jpeg" />
       </Helmet>
 
       {/* HEADER SECTION */}

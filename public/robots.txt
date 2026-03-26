@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Disallow admin or private pages (যদি ভবিষ্যতে অ্যাডমিন প্যানেল থাকে)
+# Disallow admin or private pages 
 Disallow: /admin/
 Disallow: /login/
 Disallow: /dashboard/

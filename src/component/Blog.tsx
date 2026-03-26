@@ -121,14 +121,14 @@ const Blog: React.FC = () => {
         <meta property="og:url" content="https://qatarac.com/blog" />
         <meta property="og:title" content="Blog & Maintenance Tips | Qatar AC" />
         <meta property="og:description" content="Expert advice on AC repair, maintenance, and energy saving in Doha." />
-        <meta property="og:image" content="https://qatarac.com/static/images/blog-og-image.jpg" />
+        <meta property="og:image" content="https://qatarac.com/images/image3.jpeg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://qatarac.com/blog" />
         <meta name="twitter:title" content="Blog & Maintenance Tips | Qatar AC" />
         <meta name="twitter:description" content="Expert advice on AC repair, maintenance, and energy saving in Doha." />
-        <meta name="twitter:image" content="https://qatarac.com/static/images/blog-og-image.jpg" />
+        <meta name="twitter:image" content="https://qatarac.com/images/image3.jpeg" />
       </Helmet>
 
       {/* ======================= */}
@@ -278,12 +278,14 @@ const Blog: React.FC = () => {
             </p>
             
             <form className="flex flex-col sm:flex-row gap-3">
+              <label htmlFor="newsletter-email" className="sr-only">Email address</label>
               <input 
+                id="newsletter-email"
                 type="email" 
                 placeholder="Enter your email address" 
                 className="w-full px-5 py-3 rounded-lg border border-gray-300 text-gray-800 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition"
               />
-              <button className="bg-[#E13232] text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition shadow-md">
+              <button id="btn-subscribe-newsletter" className="bg-[#E13232] text-white px-8 py-3 rounded-lg font-bold hover:bg-red-700 transition shadow-md">
                 Subscribe
               </button>
             </form>

@@ -183,14 +183,14 @@ const ServicesPage: React.FC = () => {
         <meta property="og:url" content="https://qatarac.com/services" />
         <meta property="og:title" content="Our Services | Expert AC Solutions in Doha" />
         <meta property="og:description" content="From installation to emergency repair, we cover all your cooling needs with certified experts." />
-        <meta property="og:image" content="https://qatarac.com/static/images/services-og-image.jpg" />
+        <meta property="og:image" content="https://qatarac.com/images/image3.jpeg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://qatarac.com/services" />
         <meta name="twitter:title" content="Our Services | Expert AC Solutions in Doha" />
         <meta name="twitter:description" content="From installation to emergency repair, we cover all your cooling needs with certified experts." />
-        <meta name="twitter:image" content="https://qatarac.com/static/images/services-og-image.jpg" />
+        <meta name="twitter:image" content="https://qatarac.com/images/image3.jpeg" />
       </Helmet>
 
       <div className="container mx-auto px-4 md:px-8 lg:px-12">

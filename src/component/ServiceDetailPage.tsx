@@ -679,6 +679,7 @@ const ServiceDetailPage: React.FC = () => {
             </div>
 
             <a
+              id={`btn-call-service-${service.slug}`}
               href="tel:+97412345678"
               className="flex items-center justify-center gap-2 w-full bg-[#E13232] hover:bg-red-600 text-white font-bold py-3 px-5 rounded-xl transition-all mb-3 shadow-lg shadow-red-900/30 relative z-10 group"
             >
@@ -687,6 +688,7 @@ const ServiceDetailPage: React.FC = () => {
             </a>
 
             <a
+              id={`btn-whatsapp-service-${service.slug}`}
               href="https://wa.me/97412345678"
               target="_blank"
               rel="noopener noreferrer"

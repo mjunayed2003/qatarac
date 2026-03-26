@@ -201,7 +201,10 @@ const Header: React.FC = () => {
 
         {/* Mobile Toggle Button */}
         <button
+          id="btn-mobile-menu-toggle"
           className="md:hidden text-white text-3xl focus:outline-none"
+          aria-expanded={isMobileOpen}
+          aria-label="Toggle mobile menu"
           onClick={(e) => {
             e.stopPropagation();
             setIsMobileOpen(!isMobileOpen);

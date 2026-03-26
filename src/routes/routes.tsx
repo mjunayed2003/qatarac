@@ -1,13 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 
 // Layouts
-import UserLayout from "../component/layoput/UserLayout";
-import AdminLayout from "../component/layoput/AdminLayout";
+import UserLayout from "../component/layout/UserLayout";
+import AdminLayout from "../component/layout/AdminLayout";
 
 // User Pages
 import Home from "../component/Home";
 import ServicesPage from "../component/Service";
-import ServiceDetailPage from "../component/ServiceDetailPage"; // ← নতুন import
+import ServiceDetailPage from "../component/ServiceDetailPage";
 import GalleryPage from "../component/Gallery";
 import About from "../component/About";
 import Blog from "../component/Blog";

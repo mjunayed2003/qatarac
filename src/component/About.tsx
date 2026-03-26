@@ -51,14 +51,14 @@ const About = () => {
         <meta property="og:url" content="https://qatarac.com/about" />
         <meta property="og:title" content="About Us | Qatar AC - Expert Cooling Solutions" />
         <meta property="og:description" content="Dedicated to quality and reliability. We provide top-notch cooling solutions with over 10 years of experience in Qatar." />
-        <meta property="og:image" content="https://qatarac.com/static/images/about-og-image.jpg" />
+        <meta property="og:image" content="https://qatarac.com/images/image3.jpeg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://qatarac.com/about" />
         <meta name="twitter:title" content="About Us | Qatar AC - Expert Cooling Solutions" />
         <meta name="twitter:description" content="Dedicated to quality and reliability. We provide top-notch cooling solutions with over 10 years of experience in Qatar." />
-        <meta name="twitter:image" content="https://qatarac.com/static/images/about-og-image.jpg" />
+        <meta name="twitter:image" content="https://qatarac.com/images/image3.jpeg" />
       </Helmet>
 
       {/* ======================= */}
@@ -235,10 +235,10 @@ const About = () => {
                 Contact us today for a free consultation or emergency repair.
               </p>
               <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="tel:+97477553466" className="bg-white text-[#E13232] px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
+                <a id="btn-call-now-about" href="tel:+97477553466" className="bg-white text-[#E13232] px-8 py-3 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
                   Call Now
                 </a>
-                <a href="/contact" className="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-[#E13232] transition">
+                <a id="btn-contact-about" href="/contact" className="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-[#E13232] transition">
                   Contact Us
                 </a>
               </div>

@@ -84,14 +84,14 @@ const Home = () => {
         <meta property="og:url" content="https://qatarac.com/" />
         <meta property="og:title" content="Best AC Installation & Repair in Doha | Qatar AC" />
         <meta property="og:description" content="Expert AC services in Doha. Installation, maintenance, and repair by certified professionals." />
-        <meta property="og:image" content="https://qatarac.com/static/images/og-image.jpg" />
+        <meta property="og:image" content="https://qatarac.com/images/image3.jpeg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://qatarac.com/" />
         <meta name="twitter:title" content="Best AC Installation & Repair in Doha | Qatar AC" />
         <meta name="twitter:description" content="Expert AC services in Doha. Installation, maintenance, and repair by certified professionals." />
-        <meta name="twitter:image" content="https://qatarac.com/static/images/og-image.jpg" />
+        <meta name="twitter:image" content="https://qatarac.com/images/image3.jpeg" />
       </Helmet>
 
       {/* ================================================= */}
@@ -171,6 +171,7 @@ const Home = () => {
                 className="flex flex-col sm:flex-row gap-4"
               >
                 <a
+                  id="btn-book-now"
                   href="#book"
                   className="bg-[#E13232] hover:bg-red-700 text-white px-8 py-4 rounded-md font-bold uppercase text-sm tracking-wide transition shadow-lg text-center"
                 >
@@ -178,6 +179,7 @@ const Home = () => {
                 </a>
 
                 <a
+                  id="btn-contact-us"
                   href="/contact"
                   className="border-2 border-white/40 hover:bg-white hover:text-black text-white px-8 py-4 rounded-md font-bold uppercase text-sm tracking-wide transition text-center"
                 >

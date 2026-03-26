@@ -49,14 +49,14 @@ const Contact: React.FC = () => {
         <meta property="og:url" content="https://qatarac.com/contact" />
         <meta property="og:title" content="Contact Us | 24/7 AC Repair & Service in Doha" />
         <meta property="og:description" content="Need urgent AC repair? Call us now at +974 6003 1993. Available 24/7 for all your cooling needs." />
-        <meta property="og:image" content="https://qatarac.com/static/images/contact-og-image.jpg" />
+        <meta property="og:image" content="https://qatarac.com/images/image3.jpeg" />
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:url" content="https://qatarac.com/contact" />
         <meta name="twitter:title" content="Contact Us | 24/7 AC Repair & Service in Doha" />
         <meta name="twitter:description" content="Need urgent AC repair? Call us now at +974 6003 1993. Available 24/7 for all your cooling needs." />
-        <meta name="twitter:image" content="https://qatarac.com/static/images/contact-og-image.jpg" />
+        <meta name="twitter:image" content="https://qatarac.com/images/image3.jpeg" />
       </Helmet>
 
       {/* ======================= */}
@@ -142,23 +142,23 @@ const Contact: React.FC = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-700">Your Name</label>
-                    <input type="text" placeholder="John Doe" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition" />
+                    <label htmlFor="contact-name" className="text-xs font-bold text-gray-700">Your Name</label>
+                    <input id="contact-name" type="text" placeholder="John Doe" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition" />
                   </div>
                   <div className="space-y-1">
-                    <label className="text-xs font-bold text-gray-700">Phone Number</label>
-                    <input type="tel" placeholder="+974..." className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition" />
+                    <label htmlFor="contact-phone" className="text-xs font-bold text-gray-700">Phone Number</label>
+                    <input id="contact-phone" type="tel" placeholder="+974..." className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition" />
                   </div>
                 </div>
 
                 <div className="space-y-1 mb-4">
-                  <label className="text-xs font-bold text-gray-700">Email Address</label>
-                  <input type="email" placeholder="email@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition" />
+                  <label htmlFor="contact-email" className="text-xs font-bold text-gray-700">Email Address</label>
+                  <input id="contact-email" type="email" placeholder="email@example.com" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition" />
                 </div>
 
                 <div className="space-y-1 mb-4">
-                  <label className="text-xs font-bold text-gray-700">Service Needed</label>
-                  <select className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition">
+                  <label htmlFor="contact-service" className="text-xs font-bold text-gray-700">Service Needed</label>
+                  <select id="contact-service" className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition">
                     <option>AC Repair</option>
                     <option>AC Installation</option>
                     <option>Maintenance</option>
@@ -168,11 +168,11 @@ const Contact: React.FC = () => {
                 </div>
 
                 <div className="space-y-1 mb-6">
-                  <label className="text-xs font-bold text-gray-700">Message</label>
-                  <textarea rows={3} placeholder="Describe your issue..." className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition"></textarea>
+                  <label htmlFor="contact-message" className="text-xs font-bold text-gray-700">Message</label>
+                  <textarea id="contact-message" rows={3} placeholder="Describe your issue..." className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 focus:outline-none focus:border-[#E13232] focus:ring-1 focus:ring-[#E13232] transition"></textarea>
                 </div>
 
-                <button className="w-full bg-[#E13232] text-white font-bold py-3 rounded-lg shadow-lg hover:bg-red-700 transition-all flex items-center justify-center gap-2">
+                <button id="btn-submit-contact" className="w-full bg-[#E13232] text-white font-bold py-3 rounded-lg shadow-lg hover:bg-red-700 transition-all flex items-center justify-center gap-2">
                   <span>Send Message</span>
                   <FaPaperPlane />
                 </button>
